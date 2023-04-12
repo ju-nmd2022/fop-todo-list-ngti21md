@@ -3,41 +3,39 @@ const add_button = document.querySelector("#add"),
       todo_list = document.querySelector(".list");
 let box; // 0: blank -- 1: check
 
-
-const tasks = JSON.parse(localStorage.tasks) || []; //convert tasks from localStorage
+const tasks = JSON.parse(localStorage.getItem("tasks")) || [];// convert tasks from LS
 
 tasks.forEach(function(taskText) {
-    const task = creatTaskElement(taskText);
-    todo_list.appendChild(task);    
-});//display tasks
-
+    const task = createTaskElement(taskText);
+    todo_list.appendChild(task);
+});// display tasks
 
 add_button.addEventListener ("click", function() {
-
-    if (input.value != "") {    
-    
+    if (input.value != "") {
         tasks.push(input.value);
-        localStorage.tasks = JSON.stringify(tasks);
-    
-        const tasks = createTaskElement(input.value);
-        todo_list.appendChild(tasks);
+
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+
+        const task = createTaskElement(input.value);
+        todo_list.appendChild(task);
         input.value = "";
     }
 });
 
 function createTaskElement(taskText) {
+    // task element
     const task = document.createElement("div");
     task.innerText = taskText;
     task.classList.add("tasklist");
 
-// checkbox
+    // checkbox 
     const checkbox = document.createElement("button");
     checkbox.innerHTML = '<i class="fa-regular fa-square"></i>';
     checkbox.classList.add("checkbox");
-    tasks.appendChild(checkbox);
+    task.appendChild(checkbox);
     box = 0;
 
-
+    // checkbox function
     checkbox.addEventListener("click", function() {
         if (box == 0) {
             checkbox.innerHTML = '<i class="fa fa-square-check"></i>';
@@ -45,30 +43,31 @@ function createTaskElement(taskText) {
         } else {
             checkbox.innerHTML = '<i class="fa-regular fa-square"></i>';
             box = 0;
-        } 
-});
+        }
+    });
 
-// delete
-const deleteButton = document.createElement("button");
-deleteButton.innerHTML = '<i class="fa-solid fa-x"></i>';
-deleteButton.classList.add("delete-tasks");
-task.appendChild(deleteButton);
+    // delete button 
+    const deleteButton = document.createElement("button");
+    deleteButton.innerHTML = '<i class="fa-solid fa-x"></i>';
+    deleteButton.classList.add("delete-tasks");
+    task.appendChild(deleteButton);
 
-// Add click event listener to the delete button
-deleteButton.addEventListener("click", function() {
-    task.remove();
+    deleteButton.addEventListener("click", function() {
+        task.remove();
 
-    // Remove the task from the array
-    const index = tasks.indexOf(taskText);
-    if (index > -1) {
-        tasks.splice(index, 1);
-    }
+        // remove the task from the array
+        const index = tasks.indexOf(taskText);
+        if (index > -1) {
+            tasks.splice(index, 1);
+        }
 
-    // Save the updated array to local storage
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-});
+        // save the updated array to local storage
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    });
 
-return task;
+    return task;
 }
 
-
+//ref:
+//https://www.youtube.com/watch?v=q0-N_w0Op84
+//How to use JSON properly by ChatGPT 
