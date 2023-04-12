@@ -4,48 +4,71 @@ const add_button = document.querySelector("#add"),
 let box; // 0: blank -- 1: check
 
 
+const tasks = JSON.parse(localStorage.tasks) || []; //convert tasks from localStorage
+
+tasks.forEach(function(taskText) {
+    const task = creatTaskElement(taskText);
+    todo_list.appendChild(task);    
+});//display tasks
+
+
 add_button.addEventListener ("click", function() {
 
-if (input.value != "") {    
-    const tasks = document.createElement("div"),
-          inputvalue = input.value;
-    tasks.innerText = input.value;
-    tasks.classList.add("tasklist");
-    todo_list.appendChild(tasks);
-    input.value = "";
+    if (input.value != "") {    
+    
+        tasks.push(input.value);
+        localStorage.tasks = JSON.stringify(tasks);
+    
+        const tasks = createTaskElement(input.value);
+        todo_list.appendChild(tasks);
+        input.value = "";
+    }
+});
 
-    localStorage.todo_list = inputvalue;
+function createTaskElement(taskText) {
+    const task = document.createElement("div");
+    task.innerText = taskText;
+    task.classList.add("tasklist");
 
-// checkbox 
+// checkbox
     const checkbox = document.createElement("button");
     checkbox.innerHTML = '<i class="fa-regular fa-square"></i>';
     checkbox.classList.add("checkbox");
     tasks.appendChild(checkbox);
     box = 0;
 
-  // donetask
-    if (box == 0) {
-        checkbox.addEventListener("click", function() {
+
+    checkbox.addEventListener("click", function() {
+        if (box == 0) {
             checkbox.innerHTML = '<i class="fa fa-square-check"></i>';
             box = 1;
-    
-  // undonetask
-        if (box == 1) {
-            checkbox.addEventListener("click", function() {
-                checkbox.innerHTML = '<i class="fa-regular fa-square"></i>';
-                box = 0;
-        })};
-})};
+        } else {
+            checkbox.innerHTML = '<i class="fa-regular fa-square"></i>';
+            box = 0;
+        } 
+});
 
 // delete
-    const deletemark = document.createElement("button");
-    deletemark.innerHTML = '<i class="fa-solid fa-x"></i>';
-    deletemark.classList.add("delete-tasks");
-    tasks.appendChild(deletemark);
+const deleteButton = document.createElement("button");
+deleteButton.innerHTML = '<i class="fa-solid fa-x"></i>';
+deleteButton.classList.add("delete-tasks");
+task.appendChild(deleteButton);
 
-    deletemark.addEventListener ("click", function() {
-        tasks.remove();
-    })
-}})
+// Add click event listener to the delete button
+deleteButton.addEventListener("click", function() {
+    task.remove();
+
+    // Remove the task from the array
+    const index = tasks.indexOf(taskText);
+    if (index > -1) {
+        tasks.splice(index, 1);
+    }
+
+    // Save the updated array to local storage
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+});
+
+return task;
+}
 
 
