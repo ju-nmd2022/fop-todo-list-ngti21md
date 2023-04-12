@@ -1,32 +1,32 @@
 html, body {
-    width: 50%;
-    margin: 0 auto;
-    margin-top: 100px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: #eeeeee;
-    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    background-color: black;
 }
 
 h1 {
-    width: 250px;
-    margin-left: 40px;
     font-size: 50px;
     color: black;
 }
 
-main {
-    display: grid;
-    grid-template-rows: 30px 50px;
-    grid-template-areas:
-    "input"
-    "list" ;
-    gap: 20px;
+.container {
+    background-image: url(7175949.jpg);
+    background-size: 140%;
+    width: 50%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    border: black;
+    box-sizing: border-box;
+    padding: 20px;
+
 }
 
-.input {
-    display: flex;
-    gap: 2em;
-}
 
 #input-box {
     width: 250px;
@@ -35,32 +35,19 @@ main {
     align-items: center;
     border: 2px solid #dadada;
 }
-/* #input-box:focus {
-    border-color: aquamarine;
-} */
 
 #add {
     border-radius: 50%;
-    /* border-color: aquamarine; */
     width: 30px;
     height: 30px;
+    margin-left: 10px;
 }
 #add:hover {
     border: 2px solid aquamarine;
     cursor: pointer;
 }
 
-.list {
-    color: black;
-    font-size: 20px;
-}
 
-.tasklist {
-    display: grid;
-    grid-template-columns: 300px 20px 10px;
-    grid-template-areas: "1 2 3";
-    align-items: center;
-}
 
 .checkbox, .delete-tasks {
     background: none;
@@ -68,3 +55,37 @@ main {
     color: black;
 }
 
+.checkbox {
+    margin-right: 10px;
+    font-size: 20px;
+}
+.checkbox i {
+    width: 1em;
+    display: inline-block;
+    text-align: center;
+}
+.checkbox i.fa-regular {
+    color: #999999;
+}
+.checkbox i.fa-square-check {
+    color: #33cc33;
+}
+
+.delete-tasks {
+    font-size: 18px;
+    margin-left: auto;
+}
+
+.list {
+    color: black;
+    font-size: 20px;
+    width: 100%;
+}
+.tasklist {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #cccccc;
+}
