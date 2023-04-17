@@ -6,7 +6,7 @@ let box; // 0: blank -- 1: check
 const tasks = JSON.parse(localStorage.getItem("tasks")) || [];//convert tasks from LS
 
 tasks.forEach(function(taskText) {
-    const task = createTaskElement(taskText);
+    const task = createTask(taskText);
     todo_list.appendChild(task);
 });// display tasks
 
@@ -16,13 +16,13 @@ add_button.addEventListener ("click", function() {
 
         localStorage.setItem("tasks", JSON.stringify(tasks));
 
-        const task = createTaskElement(input.value);
+        const task = createTask(input.value);
         todo_list.appendChild(task);
         input.value = "";
     }
 });
 
-function createTaskElement(taskText) {
+function createTask(taskText) {
 // task element
     const task = document.createElement("div");
     task.innerText = taskText;
