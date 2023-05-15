@@ -1,0 +1,91 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    background-color: black;
+}
+
+h1 {
+    font-size: 50px;
+    color: black;
+}
+
+.container {
+    background-image: url(7175949.jpg);
+    background-size: 150%;
+    width: 50%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    border: black;
+    box-sizing: border-box;
+    padding: 20px;
+
+}
+
+
+#input-box {
+    width: 250px;
+    height: 24px;
+    font-size: 20px;
+    align-items: center;
+    border: 2px solid #dadada;
+}
+
+#add {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+#add:hover {
+    border: 2px solid aquamarine;
+    cursor: pointer;
+}
+
+
+
+.checkbox, .delete-tasks {
+    background: none;
+    border: none;
+    color: black;
+}
+
+.checkbox {
+    margin-right: 10px;
+    font-size: 20px;
+}
+.checkbox i {
+    width: 1em;
+    display: inline-block;
+    text-align: center;
+}
+.checkbox i.fa-regular {
+    color: #999999;
+}
+.checkbox i.fa-square-check {
+    color: #33cc33;
+}
+
+.delete-tasks {
+    font-size: 18px;
+    margin-left: auto;
+}
+
+.list {
+    color: black;
+    font-size: 20px;
+    width: 100%;
+}
+.tasklist {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #cccccc;
+}
